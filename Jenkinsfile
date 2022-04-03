@@ -20,5 +20,10 @@ pipeline {
                 sh 'mvn package'             
           }
         }
+         stage('Deploy Ansible'){
+           steps {
+             sh "ansible-playbook main.yml -i inventories/dev/hosts --user admin-user --key-file /var/lib/jenkins/.ssh/id_rsa"
+           }
+         }
     }
 }
